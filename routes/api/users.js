@@ -15,7 +15,7 @@ router.get("/current", validateToken, ctrlWrapper(ctrl.getCurrentUser));
 router.get("/logout", validateToken, ctrlWrapper(ctrl.logoutUser));
 
 router.patch(
-  "current/subscription",
+  "/current/subscription",
   validateToken,
   validation(joiSubscriptionSchema),
   ctrlWrapper(ctrl.updateSubscriptionUser)

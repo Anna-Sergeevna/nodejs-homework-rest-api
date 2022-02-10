@@ -1,4 +1,4 @@
-const { NotFound } = require("http-errors");
+// const { NotFound } = require("http-errors");
 
 const { User } = require("../../models");
 
@@ -11,12 +11,12 @@ const updateSubscriptionUser = async (req, res) => {
     { subscription },
     { new: true }
   );
-
-  if (!result) {
-    throw new NotFound(`Contact with id '${_id}' not found`);
-  }
+  console.log(result);
+  // if (!result) {
+  //   throw new NotFound(`Contact with id '${_id}' not found`);
+  // }
   res.status(200).json({
-    status: "seccess",
+    status: "success",
     code: 200,
     data: {
       result,
