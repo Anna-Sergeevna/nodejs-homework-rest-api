@@ -1,6 +1,6 @@
 const path = require("path");
 const fs = require("fs/promises");
-// const Jimp = require("jimp");
+const Jimp = require("jimp");
 
 const { User } = require("../../models");
 
@@ -17,13 +17,13 @@ const uploadAvatar = async (req, res, next) => {
     const avatarURL = path.join("avatars", newFileName);
     await User.findByIdAndUpdate(_id, { avatarURL });
 
-    // await Jimp.read("lenna.png")
-    //   .then((lenna) => {
-    //     return lenna.resize(250, 250).write("lena-small-bw.jpg");
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
+    await Jimp.read(resultUpload)
+      .then((image) => {
+        return image.resize(250, 250).write(resultUpload);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
 
     res.status(200).json({
       status: "success",
