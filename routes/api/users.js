@@ -15,6 +15,10 @@ router.post("/signup", validation(joiUserSchema), ctrlWrapper(ctrl.signupUser));
 
 router.post("/login", validation(joiUserSchema), ctrlWrapper(ctrl.loginUser));
 
+router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verificationToken));
+
+// router.post("/verify", ctrlWrapper(ctrl.verifyUser));
+
 router.get("/current", validateToken, ctrlWrapper(ctrl.getCurrentUser));
 
 router.patch(
