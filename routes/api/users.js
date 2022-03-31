@@ -7,13 +7,25 @@ const {
   upload,
 } = require("../../middlewares");
 const ctrl = require("../../controllers/users");
-const { joiUserSchema, joiSubscriptionSchema } = require("../../models/user");
+const {
+  joiUserSchema,
+  joiSubscriptionSchema,
+  verifyEmailSchema,
+} = require("../../models/user");
 
 const router = express.Router();
 
 router.post("/signup", validation(joiUserSchema), ctrlWrapper(ctrl.signupUser));
 
 router.post("/login", validation(joiUserSchema), ctrlWrapper(ctrl.loginUser));
+
+router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verificationToken));
+
+router.post(
+  "/verify",
+  validation(verifyEmailSchema),
+  ctrlWrapper(ctrl.verifyUser)
+);
 
 router.get("/current", validateToken, ctrlWrapper(ctrl.getCurrentUser));
 
